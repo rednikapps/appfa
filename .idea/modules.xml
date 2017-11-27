@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/CorCup.iml" filepath="$PROJECT_DIR$/CorCup.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ldk/blacky.iml" filepath="$PROJECT_DIR$/ldk/blacky.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ldk/ldk.iml" filepath="$PROJECT_DIR$/ldk/ldk.iml" />
+      <module fileurl="file://$PROJECT_DIR$/login/login.iml" filepath="$PROJECT_DIR$/login/login.iml" />
+      <module fileurl="file://$PROJECT_DIR$/muriel/muriel.iml" filepath="$PROJECT_DIR$/muriel/muriel.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sdk/sdk.iml" filepath="$PROJECT_DIR$/sdk/sdk.iml" />
+      <module fileurl="file://$PROJECT_DIR$/track/track.iml" filepath="$PROJECT_DIR$/track/track.iml" />
+    </modules>
+  </component>
+</project>

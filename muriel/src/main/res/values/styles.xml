@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="RDNK.TextView"/>
+
+    <style name="RDNK.TextView.TitleTextView" parent="RDNK.WidthMatchParent">
+        <item name="android:textSize">@dimen/rdnk_big_title_text_view</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="RDNK.TextView.SubtitleTextView" parent="RDNK.WidthMatchParent">
+        <item name="android:textSize">@dimen/rdnk_subtitle_text_view</item>
+        <item name="android:gravity">center</item>
+    </style>
+</resources>

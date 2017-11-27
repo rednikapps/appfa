@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/RDNK.MatchParent"
+    android:background="@drawable/splash_background"
+    android:paddingBottom="@dimen/vertical_padding"
+    android:paddingTop="@dimen/vertical_padding"
+    tools:context="com.rednik.android.corcup.app.activities.login.LoginActivity">
+
+    <com.rednik.muriel.widget.MulticolorTextView
+        android:id="@+id/textview_login_title"
+        style="@style/Login.Title"
+        android:layout_alignParentTop="true"
+        tools:text="AppFA"/>
+
+    <ImageView
+        android:id="@+id/imageView"
+        style="@style/Login.BackgroundImageView"
+        android:layout_below="@+id/textview_login_title"
+        android:layout_centerHorizontal="true"/>
+
+    <ProgressBar
+        android:id="@+id/progress_login"
+        style="@style/RDNK.WrapContent"
+        android:layout_below="@+id/imageView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/login_progress_margin_top"/>
+
+    <LinearLayout
+        android:id="@+id/layout_login_button_container"
+        style="@style/RDNK.WidthMatchParent"
+        android:layout_below="@+id/imageView"
+        android:paddingLeft="@dimen/login_button_container_side_padding"
+        android:paddingRight="@dimen/login_button_container_side_padding"
+        android:visibility="gone">
+
+        <com.google.android.gms.common.SignInButton
+            android:id="@+id/google_button_signin"
+            style="@style/RDNK.WidthMatchParent"/>
+    </LinearLayout>
+
+    <com.rednik.muriel.widget.MulticolorTextView
+        android:id="@+id/textview_login_subtitle"
+        style="@style/RDNK.TextView.SubtitleTextView"
+        android:layout_alignParentBottom="true"
+        tools:text="AppFA"/>
+</RelativeLayout>

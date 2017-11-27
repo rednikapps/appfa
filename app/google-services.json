@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "962321211447",
+    "project_id": "firebase-appfa"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:962321211447:android:36eb2cb6fedb762e",
+        "android_client_info": {
+          "package_name": "com.rednik.android.corcup"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "962321211447-77m69o2ba0lhietioegvl6phvbbu0lt8.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "962321211447-bcci6hlrke8lotd0gh427idaq3d16gl7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.rednik.android.corcup",
+            "certificate_hash": "10376c1f1dcd8e63399879cdc741fbb8304d7fa8"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBnRLCcVk2TizhQieV09ekW-U1qfCi_dVU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

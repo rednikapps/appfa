@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--app-->
+    <dimen name="vertical_padding">30dp</dimen>
+
+
+    <!--login_screen-->
+    <dimen name="login_button_container_side_padding">30dp</dimen>
+    <dimen name="login_progress_margin_top">75dp</dimen>
+</resources>

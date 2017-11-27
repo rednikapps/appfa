@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--RDNK.textView-->
+    <dimen name="rdnk_title_text_view">45sp</dimen>
+    <dimen name="rdnk_subtitle_text_view">20sp</dimen>
+    <dimen name="rdnk_big_title_text_view">80sp</dimen>
+</resources>
