@@ -4,4 +4,8 @@
     <string name="facebook_app_id">315856978894017</string>
     <string name="fb_login_protocol_scheme">fb315856978894017</string>
 
+    <!--login-->
+    <string name="login_google_button_text">Ingresar con Google</string>
+    <string name="login_facebook_button_text">Ingresar con Facebook</string>
+    <string name="logout_facebook_button_text">Ingresar con Facebook</string>
 </resources>

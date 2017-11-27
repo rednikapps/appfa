@@ -1,1 +1,1 @@
-include ':app', ':sdk', ':ui', ':ldk', ':login', ':track'
+include ':app', ':sdk', ':ldk', ':login', ':track', ':ui'
