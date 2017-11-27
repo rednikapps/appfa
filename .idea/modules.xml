@@ -4,12 +4,11 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/CorCup.iml" filepath="$PROJECT_DIR$/CorCup.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ldk/blacky.iml" filepath="$PROJECT_DIR$/ldk/blacky.iml" />
       <module fileurl="file://$PROJECT_DIR$/ldk/ldk.iml" filepath="$PROJECT_DIR$/ldk/ldk.iml" />
       <module fileurl="file://$PROJECT_DIR$/login/login.iml" filepath="$PROJECT_DIR$/login/login.iml" />
-      <module fileurl="file://$PROJECT_DIR$/muriel/muriel.iml" filepath="$PROJECT_DIR$/muriel/muriel.iml" />
       <module fileurl="file://$PROJECT_DIR$/sdk/sdk.iml" filepath="$PROJECT_DIR$/sdk/sdk.iml" />
       <module fileurl="file://$PROJECT_DIR$/track/track.iml" filepath="$PROJECT_DIR$/track/track.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ui/muriel.iml" filepath="$PROJECT_DIR$/ui/muriel.iml" />
     </modules>
   </component>
 </project>

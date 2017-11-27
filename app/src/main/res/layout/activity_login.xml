@@ -33,11 +33,16 @@
         android:layout_below="@+id/imageView"
         android:paddingLeft="@dimen/login_button_container_side_padding"
         android:paddingRight="@dimen/login_button_container_side_padding"
+        android:orientation="vertical"
         android:visibility="gone">
 
         <com.google.android.gms.common.SignInButton
             android:id="@+id/google_button_signin"
             style="@style/RDNK.WidthMatchParent"/>
+
+        <com.facebook.login.widget.LoginButton
+            android:id="@+id/facebook_button_signin"
+            style="@style/RDNK.WidthMatchParent" />
     </LinearLayout>
 
     <com.rednik.muriel.widget.MulticolorTextView
