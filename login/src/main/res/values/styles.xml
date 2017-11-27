@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="FacebookLoginButton" parent="Base.TextAppearance.AppCompat.Button">
+        <item name="android:textAllCaps">true</item>
+        <item name="android:text">@string/login_facebook_button_text</item>
+        <item name="android:layout_height">@dimen/login_button_height</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:drawableLeft">@drawable/ic_facebook_logo</item>
+    </style>
+
+    <style name="GoogleLoginButton" parent="Base.TextAppearance.AppCompat.Button">
+        <item name="android:textAllCaps">true</item>
+        <item name="android:text">@string/login_google_button_text</item>
+        <item name="android:layout_height">@dimen/login_button_height</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:drawableLeft">@drawable/ic_google_plus_logo</item>
+    </style>
+</resources>

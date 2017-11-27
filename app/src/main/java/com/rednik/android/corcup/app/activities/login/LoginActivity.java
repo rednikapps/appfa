@@ -3,9 +3,9 @@ package com.rednik.android.corcup.app.activities.login;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -15,7 +15,6 @@ import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.common.SignInButton;
 import com.rednik.android.corcup.R;
 import com.rednik.android.sdk.base.RednikBaseActivity;
 import com.rednik.login.LoginManager;
@@ -34,9 +33,11 @@ public class LoginActivity extends RednikBaseActivity implements LoginView {
     @BindView(R.id.textview_login_subtitle)
     MulticolorTextView subtitleTextVIew;
     @BindView(R.id.google_button_signin)
-    SignInButton googleSignInButton;
+    Button googleSignInButton;
     @BindView(R.id.facebook_button_signin)
     LoginButton facebookSignInButton;
+    @BindView(R.id.button_facebook_simulator)
+    Button facebookButtonSimulator;
     @BindView(R.id.progress_login)
     ProgressBar loading;
     @BindView(R.id.layout_login_button_container)
@@ -89,6 +90,12 @@ public class LoginActivity extends RednikBaseActivity implements LoginView {
     }
 
     private void setFacebookSignInButton() {
+        facebookButtonSimulator.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                facebookSignInButton.performClick();
+            }
+        });
         LoginManager.getInstance().setUpFacebookLogin(callbackManager, facebookSignInButton, this);
     }
 

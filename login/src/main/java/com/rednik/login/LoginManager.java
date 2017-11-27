@@ -22,13 +22,9 @@ import com.rednik.login.dto.UserDTO;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import static com.rednik.login.facebook.FacebookKeys.BIRTHDAY;
 import static com.rednik.login.facebook.FacebookKeys.EMAIL;
 import static com.rednik.login.facebook.FacebookKeys.FIRST_NAME;
-import static com.rednik.login.facebook.FacebookKeys.GENDER;
-import static com.rednik.login.facebook.FacebookKeys.ID;
 import static com.rednik.login.facebook.FacebookKeys.LAST_NAME;
-import static com.rednik.login.facebook.FacebookKeys.LOCATION;
 
 /**
  * Created by mauricio on 26/11/17.
@@ -62,7 +58,7 @@ public class LoginManager {
 
     public void setUpFacebookLogin(@NonNull CallbackManager callbackManager, @NonNull LoginButton loginButton, @NonNull final LoginView callback) {
         loginButton.setReadPermissions(EMAIL);
-        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+        com.facebook.login.LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
                 Log.debug(callback.getTag(), "Facebook Login Success: " + loginResult.toString());
@@ -107,7 +103,7 @@ public class LoginManager {
     }
 
     private String getFacebookParametersChain() {
-        return ID + "," + FIRST_NAME + "," + LAST_NAME + "," + EMAIL + "," + GENDER + "," + BIRTHDAY + "," + LOCATION;
+        return "id, first_name, last_name, email, gender, birthday, location";
     }
 
     /**
