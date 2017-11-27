@@ -11,9 +11,9 @@
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/ldk" />
             <option value="$PROJECT_DIR$/login" />
-            <option value="$PROJECT_DIR$/muriel" />
             <option value="$PROJECT_DIR$/sdk" />
             <option value="$PROJECT_DIR$/track" />
+            <option value="$PROJECT_DIR$/ui" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

@@ -12,4 +12,8 @@ public class Log {
         // TODO do something w/this
         android.util.Log.e(tag, e.getMessage());
     }
+
+    public static void debug(@NonNull String tag, @NonNull String message) {
+
+    }
 }

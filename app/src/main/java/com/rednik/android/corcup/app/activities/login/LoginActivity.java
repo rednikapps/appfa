@@ -3,12 +3,15 @@ package com.rednik.android.corcup.app.activities.login;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.facebook.CallbackManager;
+import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -16,14 +19,14 @@ import com.google.android.gms.common.SignInButton;
 import com.rednik.android.corcup.R;
 import com.rednik.android.sdk.base.RednikBaseActivity;
 import com.rednik.login.LoginManager;
+import com.rednik.login.LoginView;
 import com.rednik.login.dto.UserDTO;
-import com.rednik.login.google.GoogleLoginView;
 import com.rednik.muriel.anim.CustomAnimationsManager;
 import com.rednik.muriel.widget.MulticolorTextView;
 
 import butterknife.BindView;
 
-public class LoginActivity extends RednikBaseActivity implements GoogleLoginView {
+public class LoginActivity extends RednikBaseActivity implements LoginView {
     private static final String TAG = LoginActivity.class.getName();
 
     @BindView(R.id.textview_login_title)
@@ -32,6 +35,8 @@ public class LoginActivity extends RednikBaseActivity implements GoogleLoginView
     MulticolorTextView subtitleTextVIew;
     @BindView(R.id.google_button_signin)
     SignInButton googleSignInButton;
+    @BindView(R.id.facebook_button_signin)
+    LoginButton facebookSignInButton;
     @BindView(R.id.progress_login)
     ProgressBar loading;
     @BindView(R.id.layout_login_button_container)
@@ -41,12 +46,17 @@ public class LoginActivity extends RednikBaseActivity implements GoogleLoginView
     private GoogleSignInClient googleSignInClient;
     private static final int RC_GOOGLE_SIGN_IN = 0110;
 
+    /*Facebook Sign In*/
+    private CallbackManager callbackManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        callbackManager = CallbackManager.Factory.create();
         butterKnifeBinder();
         setUpGoogleButton();
+        setFacebookSignInButton();
         setUpWidgets();
     }
 
@@ -62,8 +72,7 @@ public class LoginActivity extends RednikBaseActivity implements GoogleLoginView
         CustomAnimationsManager.getInstance().setProgressBarCustomAnimation(this, loading, R.drawable.loading_image_circular_animation);
     }
 
-    @Override
-    public void setUpGoogleButton() {
+    private void setUpGoogleButton() {
         googleSignInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -79,19 +88,22 @@ public class LoginActivity extends RednikBaseActivity implements GoogleLoginView
         googleSignInClient = GoogleSignIn.getClient(this, gso);
     }
 
-    @Override
-    public void onGoogleButtonPressed() {
+    private void setFacebookSignInButton() {
+        LoginManager.getInstance().setUpFacebookLogin(callbackManager, facebookSignInButton, this);
+    }
+
+    private void onGoogleButtonPressed() {
         Intent signInIntent = googleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_GOOGLE_SIGN_IN);
     }
 
     @Override
-    public void onGoogleLoginSuccess(UserDTO user) {
+    public void onLoginSuccess(UserDTO user) {
         Toast.makeText(this, user.getEmail(), Toast.LENGTH_SHORT).show();
     }
 
     @Override
-    public void onGoogleLoginFailed() {
+    public void onLoginFailed() {
 
     }
 
@@ -109,6 +121,8 @@ public class LoginActivity extends RednikBaseActivity implements GoogleLoginView
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == RC_GOOGLE_SIGN_IN) {
             LoginManager.getInstance().executeGoogleLogin(data, this);
+        } else {
+            callbackManager.onActivityResult(requestCode, resultCode, data);
         }
     }
 
