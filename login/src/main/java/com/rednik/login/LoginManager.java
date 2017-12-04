@@ -4,14 +4,11 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
-import com.facebook.CallbackManager;
-import com.facebook.FacebookCallback;
-import com.facebook.FacebookException;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.login.LoginResult;
-import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.common.api.ApiException;
@@ -22,6 +19,8 @@ import com.rednik.login.dto.UserDTO;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import static com.rednik.login.AccountTypes.ACC_FACEBOOK;
+import static com.rednik.login.AccountTypes.ACC_GOOGLE;
 import static com.rednik.login.facebook.FacebookKeys.EMAIL;
 import static com.rednik.login.facebook.FacebookKeys.FIRST_NAME;
 import static com.rednik.login.facebook.FacebookKeys.LAST_NAME;
@@ -32,6 +31,7 @@ import static com.rednik.login.facebook.FacebookKeys.LAST_NAME;
 
 public class LoginManager {
     private static LoginManager ourInstance;
+    private static final String TAG = getInstance().getClass().getName();
 
     private LoginManager() {
     }
@@ -43,57 +43,26 @@ public class LoginManager {
         return ourInstance;
     }
 
-    public void executeGoogleLogin(Intent data, LoginView callback) {
+    public UserDTO executeGoogleLogin(Intent data) {
         Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+        UserDTO userDTO = null;
         try {
             GoogleSignInAccount account = task.getResult(ApiException.class);
-            UserDTO userDTO = getUserDTO(account);
-            callback.onLoginSuccess(userDTO);
+            userDTO = getUserDTO(account);
         } catch (ApiException e) {
-            // TODO check how to use GoogleSignInStatusCodes googleSignInStatusCodes = new GoogleSignInStatusCodes()
-            callback.onLoginFailed();
-            Log.error(callback.getTag(), e);
+            // TODO USE LDK check how to use GoogleSignInStatusCodes googleSignInStatusCodes = new GoogleSignInStatusCodes()
+            Log.error(TAG, e);
         }
+        return userDTO;
     }
 
-    public void setUpFacebookLogin(@NonNull CallbackManager callbackManager, @NonNull LoginButton loginButton, @NonNull final LoginView callback) {
-        loginButton.setReadPermissions(EMAIL);
-        com.facebook.login.LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
-            @Override
-            public void onSuccess(LoginResult loginResult) {
-                Log.debug(callback.getTag(), "Facebook Login Success: " + loginResult.toString());
-                executeFacebookResponse(callback, loginResult);
-            }
-
-            @Override
-            public void onCancel() {
-
-            }
-
-            @Override
-            public void onError(FacebookException error) {
-                callback.onLoginFailed();
-                Log.error(callback.getTag(), error);
-            }
-        });
-    }
-
-    public void userCanBeIdentified(@NonNull LoginView callback) {
-        // Check for existing Google Sign In account, if the user is already signed in
-// the GoogleSignInAccount will be non-null.
-        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(callback.getContext());
-        UserDTO userDTO = getUserDTO(account);
-        callback.onUserIdentifiedResult(userDTO);
-    }
-
-    private void executeFacebookResponse(@NonNull final LoginView callback, @NonNull LoginResult loginResult) {
+    public void executeFacebookResponse(@NonNull final FacebookResponseListener callback, @NonNull LoginResult loginResult) {
         String accessToken = loginResult.getAccessToken().getToken();
         GraphRequest request = GraphRequest.newMeRequest(loginResult.getAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
 
             @Override
             public void onCompleted(JSONObject object, GraphResponse response) {
-                // Get facebook data from login
-                callback.onLoginSuccess(getUserDTO(object));
+                callback.onFacebookLoginFinished(getUserDTO(object));
             }
         });
         Bundle parameters = new Bundle();
@@ -121,7 +90,7 @@ public class LoginManager {
             String lastName = object.has(LAST_NAME) ? object.getString(LAST_NAME) : "";
             String email = object.has(EMAIL) ? object.getString(EMAIL) : "";
             //bundle.putString("location", object.getJSONObject("location").getString("name"));
-            userDTO = new UserDTO(id, name, lastName, email, uri);
+            userDTO = new UserDTO(id, name, lastName, email, uri, ACC_FACEBOOK);
         } catch (JSONException e) {
             // TODO Log.d(TAG,"Error parsing JSON");
         }
@@ -137,8 +106,12 @@ public class LoginManager {
     private UserDTO getUserDTO(GoogleSignInAccount account) {
         UserDTO userDTO = null;
         if (account != null) {
-            userDTO = new UserDTO(account.getId(), account.getDisplayName(), account.getFamilyName(), account.getEmail(), account.getPhotoUrl());
+            userDTO = new UserDTO(account.getId(), account.getDisplayName(), account.getFamilyName(), account.getEmail(), account.getPhotoUrl(), ACC_GOOGLE);
         }
         return userDTO;
+    }
+
+    public interface FacebookResponseListener {
+        void onFacebookLoginFinished(@Nullable UserDTO userDTO);
     }
 }
