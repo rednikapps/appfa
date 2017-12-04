@@ -3,12 +3,10 @@ package com.rednik.android.corcup.app.activities.login;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.facebook.CallbackManager;
 import com.facebook.login.widget.LoginButton;
@@ -17,13 +15,14 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.rednik.android.corcup.R;
 import com.rednik.android.sdk.base.RednikBaseActivity;
-import com.rednik.login.LoginManager;
+import com.rednik.android.sdk.login.SdkLoginManager;
 import com.rednik.login.LoginView;
-import com.rednik.login.dto.UserDTO;
 import com.rednik.muriel.anim.CustomAnimationsManager;
 import com.rednik.muriel.widget.MulticolorTextView;
 
 import butterknife.BindView;
+
+import static com.rednik.login.facebook.FacebookKeys.EMAIL;
 
 public class LoginActivity extends RednikBaseActivity implements LoginView {
     private static final String TAG = LoginActivity.class.getName();
@@ -64,7 +63,7 @@ public class LoginActivity extends RednikBaseActivity implements LoginView {
     @Override
     protected void onResume() {
         super.onResume();
-        LoginManager.getInstance().userCanBeIdentified(this);
+        SdkLoginManager.getInstance().userCanBeIdentified(this, this);
     }
 
     private void setUpWidgets() {
@@ -90,13 +89,14 @@ public class LoginActivity extends RednikBaseActivity implements LoginView {
     }
 
     private void setFacebookSignInButton() {
+        facebookSignInButton.setReadPermissions(EMAIL);
         facebookButtonSimulator.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 facebookSignInButton.performClick();
             }
         });
-        LoginManager.getInstance().setUpFacebookLogin(callbackManager, facebookSignInButton, this);
+        SdkLoginManager.getInstance().executeLogin(callbackManager, this);
     }
 
     private void onGoogleButtonPressed() {
@@ -105,8 +105,8 @@ public class LoginActivity extends RednikBaseActivity implements LoginView {
     }
 
     @Override
-    public void onLoginSuccess(UserDTO user) {
-        Toast.makeText(this, user.getEmail(), Toast.LENGTH_SHORT).show();
+    public void onLoginSuccess() {
+
     }
 
     @Override
@@ -115,11 +115,9 @@ public class LoginActivity extends RednikBaseActivity implements LoginView {
     }
 
     @Override
-    public void onUserIdentifiedResult(@Nullable UserDTO userDTO) {
-        if (userDTO == null) {
+    public void onUserIdentifiedResult(boolean result) {
+        if (!result) {
             showLoginButton();
-        } else {
-
         }
     }
 
@@ -127,7 +125,7 @@ public class LoginActivity extends RednikBaseActivity implements LoginView {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == RC_GOOGLE_SIGN_IN) {
-            LoginManager.getInstance().executeGoogleLogin(data, this);
+            SdkLoginManager.getInstance().executeLogin(data, this);
         } else {
             callbackManager.onActivityResult(requestCode, resultCode, data);
         }

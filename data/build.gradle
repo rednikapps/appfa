@@ -24,10 +24,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    compile project(path: ':ui')
-    compile project(path: ':login')
-    compile project(path: ':data')
-    /*Injection.butterKniffe*/
-    compile ldk.butterknife
-    annotationProcessor ldk.butterknifeCompiler
+
+    compile project(path: ':ldk')
+    compile google.gson
 }

@@ -19,7 +19,9 @@ ext {
     timber = '4.5.1'
 
     google = [
-            playServicesAuth: "com.google.android.gms:play-services-auth:$playServicesAuth"
+            playServicesAuth: "com.google.android.gms:play-services-auth:$playServicesAuth",
+            gson            : "com.google.code.gson:gson:$gson"
+
     ]
 
     misc = [
@@ -39,7 +41,6 @@ ext {
             daggerAndroidSupport  : "com.google.dagger:dagger-android-support:$dagger",
             daggerCompiler        : "com.google.dagger:dagger-compiler:$dagger",
             glide                 : "com.github.bumptech.glide:glide:$glide",
-            gson                  : "com.google.code.gson:gson:$gson",
             javaxAnnotation       : "javax.annotation:jsr250-api:$javaxAnnotation",
             leakcanary            : "com.squareup.leakcanary:leakcanary-android:$leakcanary",
             leakcanaryNoOp        : "com.squareup.leakcanary:leakcanary-android-no-op:$leakcanary",
@@ -59,6 +60,6 @@ ext {
     ]
 
     facebook = [
-            facebookLogin : 'com.facebook.android:facebook-login:[4,5)'
+            facebookLogin: 'com.facebook.android:facebook-login:[4,5)'
     ]
 }

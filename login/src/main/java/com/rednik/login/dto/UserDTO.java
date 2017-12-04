@@ -12,13 +12,15 @@ public class UserDTO {
     private final String lastName;
     private final String email;
     private final Uri profilePictureUrl;
+    private final String accountType;
 
-    public UserDTO(String id, String name, String lastName, String email, Uri profilePictureUrl) {
+    public UserDTO(String id, String name, String lastName, String email, Uri profilePictureUrl, String accountType) {
         this.id = id;
         this.name = name;
         this.lastName = lastName;
         this.email = email;
         this.profilePictureUrl = profilePictureUrl;
+        this.accountType = accountType;
     }
 
     public String getName() {
@@ -41,6 +43,10 @@ public class UserDTO {
         return id;
     }
 
+    public String getAccountType() {
+        return accountType;
+    }
+
     @Override
     public String toString() {
         return "UserDTO{" +
@@ -49,6 +55,7 @@ public class UserDTO {
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
                 ", profilePictureUrl=" + profilePictureUrl +
+                ", accountType='" + accountType + '\'' +
                 '}';
     }
 }
